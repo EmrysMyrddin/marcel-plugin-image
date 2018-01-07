@@ -1,51 +1,57 @@
-<dom-module id="marcel-plugin-image">
-  <template>
-    <style>
-      #container {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-      }
+<!DOCTYPE html>
+<html lang="en">
 
-      img {
-        width: 100%;
-        height: 100%;
-      }
+<head>
+  <meta charset="utf-8">
+  <title>marcel-plugin-image</title>
+  <script src="./marcel.js"></script>
+</head>
 
-      .proportional {
-        width: auto;
-        height: auto;
-        margin: auto;
-        max-width: 100%;
-        max-height: 100%;
-      }
-    </style>
-    <div id="container">
-      <img src$="{{src}}" class$="[[_computeImageClass(saveproportions)]]">
-    </div>
-  </template>
+<body>
+
+  <div id="container">
+    <img id="img">
+  </div>
+
+  <style>
+    #container {
+      display: flex;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .proportional {
+      width: auto;
+      height: auto;
+      margin: auto;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
 
   <script>
-    (() => {
-      class Devfest extends Polymer.Element {
-        static get is() { return 'marcel-plugin-image' }
-        static get properties() {
-          return {
-            src: String,
-            saveproportions: Boolean,
-          }
-        }
-
-        connectedCallback() {
-          super.connectedCallback();
-        }
-
-        _computeImageClass(saveProportions) {
-          return saveProportions ? "proportional" : ""
-        }
+    class Image extends Marcel.Plugin {
+      constructor() {
+        super()
+        this.img = document.getElementById('img')
       }
-      customElements.define(Devfest.is, Devfest);
-    })();
+
+      render() {
+        const { src, saveProportions } = this.props
+
+        this.img.src = src
+        this.img.className = saveProportions ? 'proportional' : ''
+      }
+    }
+
+    const instance = new Image()
   </script>
-</dom-module>
+</body>
+
+</html>
