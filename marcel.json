@@ -1,0 +1,17 @@
+{
+  "name": "Image",
+  "eltName": "marcel-plugin-image",
+  "icon": "picture_in_picture_alt",
+  "description": "A simple plugin to display an external image",
+  "frontend": {
+    "props": [
+      { "name": "src", "description": "The url of the image", "type": "string", "value": "" },
+      {
+        "name": "saveProportions",
+        "descriptions": "The save the image aspect ratio",
+        "type": "boolean",
+        "value": "true"
+      }
+    ]
+  }
+}
